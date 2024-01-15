@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+
+        div{
+            width: 20%;
+            height: 100%;
+            background: #7185f7;
+            position: absolute;
+            right:0;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    
+
+
+
+</body>
+
+
+
+</html>
+
+
+<script>
+
+    const box = document.createElement("div");
+
+    box.classList.add("låde");
+
+    document.body.appendChild(box);
+
+
+      box.addEventListener('click', flipleft);
+
+    function flipleft() {
+        box.style.backgroundColor = "#f76f6f";
+        box.style.left = "0";
+        box.style.right = null;
+        box.removeEventListener('click', flipleft);
+        box.addEventListener('click', flipright);
+    }
+
+    function flipright(){
+        box.style.backgroundColor = "#7185f7";
+        box.style.right = "0";
+        box.style.left = null;
+        box.removeEventListener('click', flipright);
+        box.addEventListener('click', flipleft);
+    }
+   
+
+
+
+</script>
