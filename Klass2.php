@@ -7,7 +7,7 @@ class FormValidator {
 
     // Kontrollera om det finns data
     public function hasData($value) {
-        return !empty($value);
+        return !empty(trim($value));
     }
 
     // Räkna antal ord i en sträng
@@ -20,11 +20,11 @@ class FormValidator {
         return strlen($value);
     }
 
-    // Skydda mot HTML och SQL-injection
+  
     public function sanitizeInput($value) {
-        // Ta bort HTML-taggar
+ 
         $sanitized = strip_tags($value);
-        // Skydda mot SQL-injektion
+
         $sanitized = htmlspecialchars($sanitized, ENT_QUOTES, 'UTF-8');
         return $sanitized;
     }
@@ -35,32 +35,36 @@ class FormValidator {
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <title>Formulär</title>
+    <title>Formulärvalidering</title>
 </head>
 <body>
     <form method="post" action="">
-        <label for="username">Användarnamn:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Lösenord:</label>
-        <input type="password" id="password" name="password" required>
+        <label for="data">Ange data:</label>
+        <input type="text" id="data" name="data" required>
         <br>
         <button type="submit">Skicka</button>
     </form>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Skapa en instans av klassen
+
         $validator = new FormValidator();
 
-        // Hämta och sanera formulärdata
-        $username = $validator->sanitizeInput($_POST['username']);
-        $password = $validator->sanitizeInput($_POST['password']);
 
-        // Visa de sanerade värdena
-        echo "<h2>Inmatade värden:</h2>";
-        echo "Användarnamn: " . $username . "<br>";
-        echo "Lösenord: " . $password . "<br>";
+        $data = $validator->sanitizeInput($_POST['data']);
+
+
+        echo "<h2>Valideringsresultat:</h2>";
+
+        // Kontrollera om det finns data
+        if ($validator->hasData($data)) {
+            echo "Inmatad data: " . $data . "<br>";
+            echo "Är det ett tal?: " . ($validator->isNumeric($data) ? 'Ja' : 'Nej') . "<br>";
+            echo "Antal ord: " . $validator->wordCount($data) . "<br>";
+            echo "Antal tecken: " . $validator->charCount($data) . "<br>";
+        } else {
+            echo "Fel: Ingen data inmatad!";
+        }
     }
     ?>
 </body>
