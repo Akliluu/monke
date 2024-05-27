@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            border: dotted rgb(208, 57, 57) 2px;
+            margin: 10px;
+        }
+        div :has(p){
+            color: blueviolet;
+        }
+
+        header :is(h2,div){
+            font-size: 60px ;
+            color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+    <div>yes</div>
+    <div>maybe <p>this</p></div>
+    <div>nuh uh</div>
+    <hr>
+    <header>
+        <div>bone</div>
+        <h2>ribs</h2>
+        <h1>ohio</h1>
+    </header>
+</body>
+</html>
