@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulär</title>
 </head>
 <body>
-<?php
+    <form method="post" action="">
+        <label for="username">Användarnamn:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Lösenord:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Skicka</button>
+    </form>
 
+    <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Sanera inmatningarna för att förhindra HTML- och SQL-injektioner
+        $username = htmlspecialchars(strip_tags($_POST['username']), ENT_QUOTES, 'UTF-8');
+        $password = htmlspecialchars(strip_tags($_POST['password']), ENT_QUOTES, 'UTF-8');
 
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-
-
-        echo "<h2>Användarnamn:</h2>";
-        echo "<p>$username</p>";
-        echo "<h2>Lösenord:</h2>";
-        echo "<p>$password</p>";
+        // Visa de sanerade värdena
+        echo "<h2>Inmatade värden:</h2>";
+        echo "Användarnamn: " . $username . "<br>";
+        echo "Lösenord: " . $password . "<br>";
     }
-?>
-
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <label for="username">Användarnamn:</label><br>
-    <input type="text" id="username" name="username"><br>
-    <label for="password">Lösenord:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Skicka">
-</form>
-
+    ?>
 </body>
 </html>
