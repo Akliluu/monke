@@ -19,13 +19,13 @@
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Kontrollera om användarnamn och lösenord finns
+
         if (!empty($_POST['username']) && !empty($_POST['password'])) {
-            // Sanera inmatningarna för att förhindra HTML- och SQL-injektioner
+ 
             $username = htmlspecialchars(strip_tags($_POST['username']), ENT_QUOTES, 'UTF-8');
             $password = htmlspecialchars(strip_tags($_POST['password']), ENT_QUOTES, 'UTF-8');
 
-            // Visa de sanerade värdena
+
             echo "<h2>Inmatade värden:</h2>";
             echo "Användarnamn: " . $username . "<br>";
             echo "Lösenord: " . $password . "<br>";
